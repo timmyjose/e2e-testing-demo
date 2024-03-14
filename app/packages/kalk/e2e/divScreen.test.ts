@@ -54,6 +54,14 @@ describe('Div Screen', () => {
       await textInputY.typeText('10')
       await divButton.tap()
       await expect(divQuotText).toHaveText('2')
+
+      await textInputX.clearText()
+      await textInputY.clearText()
+
+      await textInputX.typeText('20')
+      await textInputY.typeText('0')
+      await divButton.tap()
+      await expect(divQuotText).toHaveText('0')
     })
   })
 })
