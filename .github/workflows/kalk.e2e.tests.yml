@@ -1,12 +1,12 @@
 name: kalk / build / e2e tests
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - 'main'
-    paths:
-      - 'app/**'
-      - '.github/workflows/kalk.e2e.tests.yml'
+  # push:
+  #   branches:
+  #     - 'main'
+  #   paths:
+  #     - 'app/**'
+  #     - '.github/workflows/kalk.e2e.tests.yml'
 jobs:
   build_ios:
     name: Install, Build, and e2e Testing (iOS)
