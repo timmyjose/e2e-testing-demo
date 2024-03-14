@@ -42,27 +42,35 @@ export default function Add() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Pressable style={styles.button} onPress={() => navigation.goBack()}>
+      <Pressable testID='add-go-back-button' style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Go Back</Text>
       </Pressable>
       <TextInput
+        testID='add-textinput-x'
         style={styles.textinput}
         keyboardType='numeric'
         placeholder='Enter the first number'
         value={x.toString()}
-        onChangeText={text => setX(parseFloat(text))}
+        onChangeText={text => {
+          const sanitisedText = text.replace(/[^0-9.]/g, '')
+          setX(parseFloat(sanitisedText))
+        }}
       />
       <TextInput
+        testID='add-textinput-y'
         style={styles.textinput}
         keyboardType='numeric'
         placeholder='Enter the second number'
         value={y.toString()}
-        onChangeText={text => setY(parseFloat(text))}
+        onChangeText={text => {
+          const sanitisedText = text.replace(/[^0-9.]/g, '')
+          setY(parseFloat(sanitisedText))
+        }}
       />
-      <Pressable style={styles.button} onPress={handleAdd}>
+      <Pressable testID='add-add-button' style={styles.button} onPress={handleAdd}>
         <Text style={styles.buttonText}>Add</Text>
       </Pressable>
-      <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{sum}</Text>
+      <Text testID='add-sum-text' style={{ fontSize: 20, fontWeight: 'bold' }}>{sum}</Text>
     </SafeAreaView>
   )
 }

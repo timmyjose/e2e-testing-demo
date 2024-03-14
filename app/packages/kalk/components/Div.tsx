@@ -42,27 +42,35 @@ export default function Div() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Pressable style={styles.button} onPress={() => navigation.goBack()}>
+      <Pressable testID='div-go-back-button' style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Go Back</Text>
       </Pressable>
       <TextInput
+        testID='div-textinput-x'
         style={styles.textinput}
         keyboardType='numeric'
         placeholder='Enter the first number'
         value={x.toString()}
-        onChangeText={text => setX(parseFloat(text))}
+        onChangeText={text => {
+          const sanitisedText = text.replace(/[^0-9.]/g, '')
+          setX(parseFloat(sanitisedText))
+        }}
       />
       <TextInput
+        testID='div-textinput-y'
         style={styles.textinput}
         keyboardType='numeric'
         placeholder='Enter the second number'
         value={y.toString()}
-        onChangeText={text => setY(parseFloat(text))}
+        onChangeText={text => {
+          const sanitisedText = text.replace(/[^0-9.]/g, '')
+          setY(parseFloat(sanitisedText))
+        }}
       />
-      <Pressable style={styles.button} onPress={handleDiv}>
+      <Pressable testID='div-div-button' style={styles.button} onPress={handleDiv}>
         <Text style={styles.buttonText}>Div</Text>
       </Pressable>
-      <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{quot}</Text>
+      <Text testID='div-quot-text' style={{ fontSize: 20, fontWeight: 'bold' }}>{quot}</Text>
     </SafeAreaView>
   )
 }

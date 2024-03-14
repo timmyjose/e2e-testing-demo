@@ -42,27 +42,35 @@ export default function Mul() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Pressable style={styles.button} onPress={() => navigation.goBack()}>
+      <Pressable testID='mul-go-back-button' style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Go Back</Text>
       </Pressable>
       <TextInput
+        testID='mul-textinput-x'
         style={styles.textinput}
         keyboardType='numeric'
         placeholder='Enter the first number'
         value={x.toString()}
-        onChangeText={text => setX(parseFloat(text))}
+        onChangeText={text => {
+          const sanitisedText = text.replace(/[^0-9.]/g, '')
+          setX(parseFloat(sanitisedText))
+        }}
       />
       <TextInput
+        testID='mul-textinput-y'
         style={styles.textinput}
         keyboardType='numeric'
         placeholder='Enter the second number'
         value={y.toString()}
-        onChangeText={text => setY(parseFloat(text))}
+        onChangeText={text => {
+          const sanitisedText = text.replace(/[^0-9.]/g, '')
+          setY(parseFloat(sanitisedText))
+        }}
       />
-      <Pressable style={styles.button} onPress={handleMul}>
+      <Pressable testID='mul-mul-button' style={styles.button} onPress={handleMul}>
         <Text style={styles.buttonText}>Mul</Text>
       </Pressable>
-      <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{prod}</Text>
+      <Text testID='mul-prod-text' style={{ fontSize: 20, fontWeight: 'bold' }}>{prod}</Text>
     </SafeAreaView>
   )
 }

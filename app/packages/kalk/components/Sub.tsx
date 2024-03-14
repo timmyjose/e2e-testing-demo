@@ -42,27 +42,35 @@ export default function Sub() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Pressable style={styles.button} onPress={() => navigation.goBack()}>
+      <Pressable testID='sub-go-back-button' style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Go Back</Text>
       </Pressable>
       <TextInput
+        testID='sub-textinput-x'
         style={styles.textinput}
         keyboardType='numeric'
         placeholder='Enter the first number'
         value={x.toString()}
-        onChangeText={text => setX(parseFloat(text))}
+        onChangeText={text => {
+          const sanitisedText = text.replace(/[^0-9.]/g, '')
+          setX(parseFloat(sanitisedText))
+        }}
       />
       <TextInput
+        testID='sub-textinput-y'
         style={styles.textinput}
         keyboardType='numeric'
         placeholder='Enter the second number'
         value={y.toString()}
-        onChangeText={text => setY(parseFloat(text))}
+        onChangeText={text => {
+          const sanitisedText = text.replace(/[^0-9.]/g, '')
+          setY(parseFloat(sanitisedText))
+        }}
       />
-      <Pressable style={styles.button} onPress={handleSub}>
+      <Pressable testID='sub-sub-button' style={styles.button} onPress={handleSub}>
         <Text style={styles.buttonText}>Sub</Text>
       </Pressable>
-      <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{diff}</Text>
+      <Text testID='sub-diff-text' style={{ fontSize: 20, fontWeight: 'bold' }}>{diff}</Text>
     </SafeAreaView>
   )
 }
