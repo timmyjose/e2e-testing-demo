@@ -12,9 +12,13 @@ $ yarn setup && yarn android
 
 ## e2e Test
 
-### Required Services
+Start the required services:
 
-TBD
+```
+$ docker-compose up
+```
+
+Run the e2e tests:
 
 ```
 $ detox build -c ios.test

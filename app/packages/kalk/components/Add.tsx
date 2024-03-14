@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 import { KALK_ADD_SERVER } from '../constants'
 import axios from 'axios'
 
-const ADD_SERVER_URL = `http://localhost:${KALK_ADD_SERVER}/exec`
+const ADD_SERVER_URL = `http://0.0.0.0:${KALK_ADD_SERVER}/exec`
 
 type AddRequest = {
   x: number;
