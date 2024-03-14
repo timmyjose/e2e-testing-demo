@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StatusBar } from 'expo-status-bar'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text } from 'react-native'
 import { RootParamsList } from '../App'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -11,17 +11,17 @@ export default function Home() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Pressable style={styles.button} onPress={() => navigation.navigate('Add')}>
-        <Text style={styles.buttonText}>Add Demo</Text>
+      <Pressable testID='home-add-button' style={styles.button} onPress={() => navigation.navigate('Add')}>
+        <Text testID='home-add-button-text' style={styles.buttonText}>Add Demo</Text>
       </Pressable>
-      <Pressable style={styles.button} onPress={() => navigation.navigate('Sub')}>
-        <Text style={styles.buttonText}>Sub Demo</Text>
+      <Pressable testID='home-sub-button' style={styles.button} onPress={() => navigation.navigate('Sub')}>
+        <Text testID='home-sub-button-text' style={styles.buttonText}>Sub Demo</Text>
       </Pressable>
-      <Pressable style={styles.button} onPress={() => navigation.navigate('Mul')}>
-        <Text style={styles.buttonText}>Mul Demo</Text>
+      <Pressable testID='home-mul-button' style={styles.button} onPress={() => navigation.navigate('Mul')}>
+        <Text testID='home-mul-button-text' style={styles.buttonText}>Mul Demo</Text>
       </Pressable>
-      <Pressable style={styles.button} onPress={() => navigation.navigate('Div')}>
-        <Text style={styles.buttonText}>Div Demo</Text>
+      <Pressable testID='home-div-button' style={styles.button} onPress={() => navigation.navigate('Div')}>
+        <Text testID='home-div-button-text' style={styles.buttonText}>Div Demo</Text>
       </Pressable>
       <StatusBar style='auto'/>
     </SafeAreaView>

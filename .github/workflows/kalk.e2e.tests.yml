@@ -1,0 +1,53 @@
+name: kalk / build / e2e tests
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'app/**'
+      - '.github/workflows/kalk.e2e.tests.yml'
+jobs:
+  build_ios:
+    name: Install, Build, and e2e Testing (iOS)
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+          lfs: 'true'
+
+      - name: Set LANG globally for subsequent steps
+        run: echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
+
+      - name: Install detox cli
+        run: npm install -g detox-cli
+
+      - name: Install applesimutils
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
+
+      - name: Checkout 
+        uses: actions/checkout@v4
+        with: 
+          lfs: 'true'
+
+      - name: Setup Project
+        working-directory: app/packages/kalk
+        run: bash -c "yarn setup"
+
+      - name: Pod install for iOS
+        working-directory: app/packages/kalk/ios
+        run: npx pod-install
+
+      - name: Detox build for iOS
+        working-directory: app/packages/kalk
+        run: bash -c "detox build -c ios.release" > /dev/null
+
+      - name: Detox e2e tests for iOS
+        working-directory: app/packages/kalk
+        run: bash -c "NODE_OPTIONS='--max-old-space-size=4096' detox test -c ios.release"

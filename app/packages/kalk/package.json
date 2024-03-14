@@ -4,6 +4,8 @@
   "main": "index.js",
   "scripts": {
     "setup": "bash ./scripts/setup.sh",
+    "eas-build-pre-install": "bash ./eas-hooks/eas-build-pre-install.sh && bash ./scripts/setup.sh",
+    "eas-build-on-success": "bash ./eas-hooks/eas-build-on-success.sh",
     "android": "expo run:android",
     "android:prod": "expo run:android --variant release",
     "ios": "npx pod-install && expo run:ios",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@config-plugins/detox": "^7.0.0",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.27",
     "@types/react": "~18.2.45",
