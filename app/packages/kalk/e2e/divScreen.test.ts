@@ -41,7 +41,8 @@ describe('Div Screen', () => {
       const goBackButton = element(by.id('div-go-back-button'))
       await goBackButton.tap()
 
-      // todo - detect that we are in the Home Screen
+      const homeScreen = element(by.id('home-screen'))
+      await expect(homeScreen).toExist()
     })
 
     it('Should add numbers correctly', async () => {

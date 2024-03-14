@@ -41,7 +41,7 @@ export default function Sub() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView testID='sub-screen' style={styles.container}>
       <Pressable testID='sub-go-back-button' style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Go Back</Text>
       </Pressable>

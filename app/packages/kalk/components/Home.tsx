@@ -10,7 +10,7 @@ export default function Home() {
   const navigation = useNavigation<NativeStackNavigationProp<RootParamsList>>()
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView testID='home-screen' style={styles.container}>
       <Pressable testID='home-add-button' style={styles.button} onPress={() => navigation.navigate('Add')}>
         <Text testID='home-add-button-text' style={styles.buttonText}>Add Demo</Text>
       </Pressable>

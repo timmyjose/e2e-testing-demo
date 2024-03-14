@@ -41,7 +41,7 @@ export default function Div() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView testID='div-screen' style={styles.container}>
       <Pressable testID='div-go-back-button' style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Go Back</Text>
       </Pressable>

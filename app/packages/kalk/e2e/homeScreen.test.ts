@@ -73,4 +73,38 @@ describe('Home Screen', () => {
       })
     })
   })
+
+  describe('Home Screen buttons should navigate to the correct screens', () => {
+    it('Should navigate to the \'Add\' screen upon clicking the \'Add\' button', async () => {
+      const addButton = element(by.id('home-add-button'))
+      await addButton.tap()
+
+      const addScreen = element(by.id('add-screen'))
+      await expect(addScreen).toExist()
+    })
+
+    it('Should navigate to the \'Sub\' screen upon clicking the \'Sub\' button', async () => {
+      const subButton = element(by.id('home-sub-button'))
+      await subButton.tap()
+
+      const subScreen = element(by.id('sub-screen'))
+      await expect(subScreen).toExist()
+    })
+
+    it('Should navigate to the \'Mul\' screen upon clicking the \'Mul\' button', async () => {
+      const mulButton = element(by.id('home-mul-button'))
+      await mulButton.tap()
+
+      const mulScreen = element(by.id('mul-screen'))
+      await expect(mulScreen).toExist()
+    })
+
+    it('Should navigate to the \'Div\' screen upon clicking the \'Div\' button', async () => {
+      const divButton = element(by.id('home-div-button'))
+      await divButton.tap()
+
+      const divScreen = element(by.id('div-screen'))
+      await expect(divScreen).toExist()
+    })
+  })
 })

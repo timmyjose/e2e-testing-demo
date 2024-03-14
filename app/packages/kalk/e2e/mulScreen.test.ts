@@ -41,7 +41,8 @@ describe('Mul Screen', () => {
       const goBackButton = element(by.id('mul-go-back-button'))
       await goBackButton.tap()
 
-      // todo - detect that we are in the Home Screen
+      const homeScreen = element(by.id('home-screen'))
+      await expect(homeScreen).toExist()
     })
 
     it('Should multiply numbers correctly', async () => {

@@ -41,7 +41,7 @@ export default function Add() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView testID='add-screen' style={styles.container}>
       <Pressable testID='add-go-back-button' style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Go Back</Text>
       </Pressable>

@@ -41,7 +41,7 @@ export default function Mul() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView testID='mul-screen' style={styles.container}>
       <Pressable testID='mul-go-back-button' style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Go Back</Text>
       </Pressable>
