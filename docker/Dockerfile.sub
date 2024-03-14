@@ -1,0 +1,11 @@
+FROM rust:latest
+
+WORKDIR /build
+
+COPY . .
+
+RUN cargo build --release
+
+EXPOSE 9001
+
+CMD ["/build/target/release/sub"]
