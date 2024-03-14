@@ -1,0 +1,11 @@
+[workspace]
+resolver = "2"
+members = ["pkg/*"]
+
+[workspace.dependencies]
+actix-web = "4.5.1"
+eyre = "0.6.12"
+serde = { version = "1.0.197", features = ["derive"] }
+tokio = { version = "1.36.0", features = ["full"] }
+
+
