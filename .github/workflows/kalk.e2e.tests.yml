@@ -1,27 +1,86 @@
 name: kalk / build / e2e tests
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - 'main'
-  #   paths:
-  #     - 'app/**'
-  #     - '.github/workflows/kalk.e2e.tests.yml'
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'app/**'
+      - '.github/workflows/kalk.e2e.tests.yml'
 jobs:
   build_ios:
     name: Install, Build, and e2e Testing (iOS)
-    runs-on: macos-14
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: 'true'
       - uses: actions/setup-node@v4
         with:
           node-version: 18.x
           cache: yarn
           cache-dependency-path: '**/yarn.lock'
-          lfs: 'true'
 
       - name: Set LANG globally for subsequent steps
         run: echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
+
+      - name: unbreak python in github actions
+        run: |
+           find /usr/local/bin -lname '*/Library/Frameworks/Python.framework/*' -delete
+           sudo rm -rf /Library/Frameworks/Python.framework/
+           brew install --force python3 && brew unlink python3 && brew unlink python3 && brew link --overwrite python3
+ 
+      - name: Install and setup docker, docker-compose, and colima
+        run: |
+          brew install docker docker-compose colima
+          # Link the Docker Compose v2 plugin so it's understood by the docker CLI
+          mkdir -p ~/.docker/cli-plugins
+          ln -sfn /usr/local/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose
+
+          COLIMA_DIR=$HOME/.colima/default
+          mkdir -p "${COLIMA_DIR}"
+          COLIMA_YAML=$HOME/.colima/default/colima.yaml
+          touch ${COLIMA_YAML}
+          sed -i '' 's/propagateProxyEnv: null/propagateProxyEnv: true/' "${COLIMA_YAML}"
+
+          if ! grep -q 'propagateProxyEnv: true' "${COLIMA_YAML}"; then
+            echo 'propagateProxyEnv: true' >> "${COLIMA_YAML}"
+          fi
+
+          colima start
+
+        env:
+           HOMEBREW_NO_AUTO_UPDATE: 1
+           HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
+           CI: true
+
+      - name: Run the required services
+        run: |
+          docker-compose up -d
+          docker ps
+
+      - name: Check that the required services are up
+        run: |
+          echo "Checking whether services are up..."
+          declare -a containers=("e2e-testing-demo-add_server-1" "e2e-testing-demo-sub_server-1" "e2e-testing-demo-mul_server-1" "e2e-testing-demo-div_server-1")
+
+          for container in "${containers[@]}"
+          do
+            if ! docker ps --format '{{.Names}}' | grep -q "${container}"
+            then
+              echo "Service ${container} is not up. Aborting..."
+              exit 1
+            fi
+          done
+
+          echo "All services are up and ready."
+
+      - name: Test services using curl
+        run: |
+          curl -X POST -H 'Content-Type: application/json' -d '{"x": 200, "y": 100}' http://127.0.0.1:9000/exec 
+          curl -X POST -H 'Content-Type: application/json' -d '{"x": 200, "y": 100}' http://127.0.0.1:9001/exec 
+          curl -X POST -H 'Content-Type: application/json' -d '{"x": 200, "y": 100}' http://127.0.0.1:9002/exec 
+          curl -X POST -H 'Content-Type: application/json' -d '{"x": 200, "y": 100}' http://127.0.0.1:9003/exec 
 
       - name: Install detox cli
         run: npm install -g detox-cli
@@ -30,11 +89,6 @@ jobs:
         run: |
           brew tap wix/brew
           brew install applesimutils
-
-      - name: Checkout 
-        uses: actions/checkout@v4
-        with: 
-          lfs: 'true'
 
       - name: Setup Project
         working-directory: app/packages/kalk
@@ -46,8 +100,11 @@ jobs:
 
       - name: Detox build for iOS
         working-directory: app/packages/kalk
-        run: bash -c "detox build -c ios.release" > /dev/null
+        run: bash -c "detox build -c ios.release.ci" > /dev/null
 
       - name: Detox e2e tests for iOS
         working-directory: app/packages/kalk
-        run: bash -c "NODE_OPTIONS='--max-old-space-size=4096' detox test -c ios.release"
+        run: bash -c "NODE_OPTIONS='--max-old-space-size=4096' detox test --headless -c ios.release.ci"
+
+      - name: Shut down services
+        run: docker-compose down

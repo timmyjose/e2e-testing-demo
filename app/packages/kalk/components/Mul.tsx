@@ -8,7 +8,8 @@ import { useNavigation } from '@react-navigation/native'
 import { KALK_MUL_SERVER } from '../constants'
 import axios from 'axios'
 
-const MUL_SERVER_URL = `http://localhost:${KALK_MUL_SERVER}/exec`
+const MUL_SERVER_BASE = process.env.CI ? 'e2e-testing-demo-mul_server-1' : '0.0.0.0'
+const MUL_SERVER_URL = `http://${MUL_SERVER_BASE}:${KALK_MUL_SERVER}/exec`
 
 type MulRequest = {
   x: number;

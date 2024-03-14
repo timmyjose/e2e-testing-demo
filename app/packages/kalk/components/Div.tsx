@@ -8,7 +8,8 @@ import * as React from 'react'
 import { KALK_DIV_SERVER } from '../constants'
 import axios from 'axios'
 
-const DIV_SERVER_URL = `http://localhost:${KALK_DIV_SERVER}/exec`
+const DIV_SERVER_BASE = process.env.CI ? 'e2e-testing-demo-div_server-1' : '0.0.0.0'
+const DIV_SERVER_URL = `http://${DIV_SERVER_BASE}:${KALK_DIV_SERVER}/exec`
 
 type DivRequest = {
   x: number;
