@@ -25,3 +25,7 @@ $ detox build -c ios.test
 $ detox test -c ios.test --reuse
 ```
 
+## CI 
+
+Currently, the CI Workflow expects a local `macos` runner. Pushes to `main` will trigger the Workflow.
+
