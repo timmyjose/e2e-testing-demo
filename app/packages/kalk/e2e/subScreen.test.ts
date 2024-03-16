@@ -45,7 +45,7 @@ describe('Sub Screen', () => {
       await expect(homeScreen).toExist()
     })
 
-    it('Should add numbers correctly', async () => {
+    it('Should subtract numbers correctly', async () => {
       const textInputX = element(by.id('sub-textinput-x'))
       const textInputY = element(by.id('sub-textinput-y'))
       const subButton = element(by.id('sub-sub-button'))

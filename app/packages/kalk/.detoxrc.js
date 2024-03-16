@@ -23,12 +23,6 @@ module.exports = {
         'xcodebuild -workspace ios/kalk.xcworkspace -scheme kalk -configuration Debug -sdk iphonesimulator -arch arm64 -derivedDataPath ios/build',
       binaryPath: 'ios/build/Build/Products/Debug-iphonesimulator/kalk.app'
     },
-    'ios.release.ci': {
-      type: 'ios.app',
-      build:
-        'xcodebuild -workspace ios/kalk.xcworkspace -scheme kalk -configuration Release -sdk iphonesimulator -arch x86_64 -derivedDataPath ios/build',
-      binaryPath: 'ios/build/Build/Products/Release-iphonesimulator/kalk.app'
-    },
     'ios.release': {
       type: 'ios.app',
       build:
@@ -66,10 +60,6 @@ module.exports = {
     'ios.debug': {
       device: 'simulator',
       app: 'ios.debug'
-    },
-    'ios.release.ci': {
-      device: 'simulator',
-      app: 'ios.release.ci'
     },
     'ios.release': {
       device: 'simulator',

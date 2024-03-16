@@ -5,10 +5,9 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useState } from 'react'
 import * as React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { KALK_ADD_SERVER } from '../constants'
 import axios from 'axios'
 
-const ADD_SERVER_URL = `http://127.0.0.1:${KALK_ADD_SERVER}/exec`
+const ADD_SERVER_URL = 'http://127.0.0.1:9000/exec'
 
 type AddRequest = {
   x: number;

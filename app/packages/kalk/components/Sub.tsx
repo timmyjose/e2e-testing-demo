@@ -5,10 +5,9 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useState } from 'react'
 import * as React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { KALK_SUB_SERVER } from '../constants'
 import axios from 'axios'
 
-const SUB_SERVER_URL = `http://127.0.0.1:${KALK_SUB_SERVER}/exec`
+const SUB_SERVER_URL = 'http://127.0.0.1:9001/exec'
 
 type SubRequest = {
   x: number;

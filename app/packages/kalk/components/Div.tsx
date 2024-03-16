@@ -5,10 +5,9 @@ import { RootParamsList } from '../App'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useState } from 'react'
 import * as React from 'react'
-import { KALK_DIV_SERVER } from '../constants'
 import axios from 'axios'
 
-const DIV_SERVER_URL = `http://127.0.0.1:${KALK_DIV_SERVER}/exec`
+const DIV_SERVER_URL = 'http://127.0.0.1:9003/exec'
 
 type DivRequest = {
   x: number;

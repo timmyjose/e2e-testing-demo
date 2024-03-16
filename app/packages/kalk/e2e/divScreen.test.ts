@@ -45,7 +45,7 @@ describe('Div Screen', () => {
       await expect(homeScreen).toExist()
     })
 
-    it('Should add numbers correctly', async () => {
+    it('Should divide numbers correctly', async () => {
       const textInputX = element(by.id('div-textinput-x'))
       const textInputY = element(by.id('div-textinput-y'))
       const divButton = element(by.id('div-div-button'))
