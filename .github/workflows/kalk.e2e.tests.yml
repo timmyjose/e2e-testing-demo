@@ -47,10 +47,42 @@ jobs:
 
       - name: Test services using curl
         run: |
-          curl -X POST -H 'Content-Type: application/json' -d '{"x": 200, "y": 100}' http://127.0.0.1:9000/exec 
-          curl -X POST -H 'Content-Type: application/json' -d '{"x": 200, "y": 100}' http://127.0.0.1:9001/exec 
-          curl -X POST -H 'Content-Type: application/json' -d '{"x": 200, "y": 100}' http://127.0.0.1:9002/exec 
-          curl -X POST -H 'Content-Type: application/json' -d '{"x": 200, "y": 100}' http://127.0.0.1:9003/exec 
+          retries=0
+          service_counter=0
+          all_services_up=1
+          declare -a services=(http://127.0.0.1:9000/exec http://127.0.0.1:9001/exec http://127.0.0.1:9002/exec http://127.0.0.1:9003/exec)
+
+          while [[ $retries -lt 5 ]]
+          do
+            for service in "${services[@]}"
+            do
+              curl -X POST -H 'Content-Type: application/json' -d '{"x": 200, "y": 100}' $service &>/dev/null
+              if [[ "$?" -eq 0 ]]
+              then
+                service_counter=$((service_counter + 1))
+              fi
+            done
+
+            if [[ $service_counter -eq ${#services[@]} ]]
+            then
+              all_services_up=0
+              break
+            else
+              service_counter=0
+              retries=$((retries + 1))
+              sleep 5
+              echo "Services not ready yet. Retrying..."
+              continue
+            fi
+          done
+
+          if [[ $all_services_up -eq 0 ]]
+          then
+            echo "All services checked and ready."
+          else
+            echo "Services are not ready. Aborting..."
+            exit 1
+          fi
 
       - name: Install detox cli
         run: npm install -g detox-cli
