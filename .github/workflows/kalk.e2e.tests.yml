@@ -15,11 +15,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: 'true'
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
-          cache: yarn
-          cache-dependency-path: '**/yarn.lock'
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 18.x
+      #     cache: yarn
+      #     cache-dependency-path: '**/yarn.lock'
 
       - name: Set LANG globally for subsequent steps
         run: echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
