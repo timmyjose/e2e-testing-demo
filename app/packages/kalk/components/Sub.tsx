@@ -8,8 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 import { KALK_SUB_SERVER } from '../constants'
 import axios from 'axios'
 
-const SUB_SERVER_BASE = process.env.CI ? 'e2e-testing-demo-sub_server-1' : '0.0.0.0'
-const SUB_SERVER_URL = `http://${SUB_SERVER_BASE}:${KALK_SUB_SERVER}/exec`
+const SUB_SERVER_URL = `http://127.0.0.1:${KALK_SUB_SERVER}/exec`
 
 type SubRequest = {
   x: number;
