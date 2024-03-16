@@ -1,5 +1,6 @@
 import { expect, device, element, by } from 'detox'
 import { beforeAll, beforeEach, describe, it } from '@jest/globals'
+import { swipeIntros } from './swipeIntroSlider'
 
 describe('Home Screen', () => {
   beforeAll(async () => {
@@ -10,6 +11,9 @@ describe('Home Screen', () => {
 
   beforeEach(async () => {
     await device.reloadReactNative()
+
+    // Swipe through the slider screens
+    await swipeIntros()
   })
 
   describe('Home Screen elements should be visible', () => {

@@ -1,5 +1,6 @@
 import { expect, device, element, by } from 'detox'
 import { beforeEach, beforeAll, describe, it } from '@jest/globals'
+import { swipeIntros } from './swipeIntroSlider'
 
 describe('Sub Screen', () => {
   beforeAll(async () => {
@@ -10,6 +11,8 @@ describe('Sub Screen', () => {
 
   beforeEach(async () => {
     await device.reloadReactNative()
+
+    await swipeIntros()
 
     // go to the 'Sub' screen
     const subButton = element(by.id('home-sub-button'))

@@ -1,5 +1,6 @@
 import { expect, device, element, by } from 'detox'
 import { beforeEach, beforeAll, describe, it } from '@jest/globals'
+import { swipeIntros } from './swipeIntroSlider'
 
 describe('Mul Screen', () => {
   beforeAll(async () => {
@@ -10,6 +11,8 @@ describe('Mul Screen', () => {
 
   beforeEach(async () => {
     await device.reloadReactNative()
+
+    await swipeIntros()
 
     // go to the 'Mul' screen
     const mulButton = element(by.id('home-mul-button'))
