@@ -84,13 +84,13 @@ jobs:
             exit 1
           fi
 
-      - name: Install detox cli
-        run: npm install -g detox-cli
+      # - name: Install detox cli
+      #   run: npm install -g detox-cli
 
-      - name: Install applesimutils
-        run: |
-          brew tap wix/brew
-          brew install applesimutils
+      # - name: Install applesimutils
+      #   run: |
+      #     brew tap wix/brew
+      #     brew install applesimutils
 
       - name: Setup Project
         working-directory: app/packages/kalk
