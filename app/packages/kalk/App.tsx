@@ -11,7 +11,6 @@ import AppIntroSlider from 'react-native-app-intro-slider'
 import { ENV_NAME } from './constants'
 import JsonPlaceHolder from './components/JsonPlaceHolder'
 
-console.log('ENV_NAME = ', ENV_NAME)
 if (ENV_NAME === 'e2e') {
   console.log('Running in e2e environment. Ignoring all warning/error logs')
   LogBox.ignoreAllLogs()
