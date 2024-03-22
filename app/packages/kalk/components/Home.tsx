@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar'
 import { Pressable, StyleSheet, Text } from 'react-native'
 import { RootParamsList } from '../App'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { ENV_NAME } from '../constants'
 
 export default function Home() {
   const navigation = useNavigation<NativeStackNavigationProp<RootParamsList>>()
@@ -23,6 +24,11 @@ export default function Home() {
       <Pressable testID='home-div-button' style={styles.button} onPress={() => navigation.navigate('Div')}>
         <Text testID='home-div-button-text' style={styles.buttonText}>Div Demo</Text>
       </Pressable>
+      { ENV_NAME === 'e2e' &&
+        (<Pressable testID='home-json-placeholder-button' style={styles.button} onPress={() => navigation.navigate('JsonPlaceHolder')}>
+          <Text testID='home-json-placeholder-text' style={styles.buttonText}>Json Demo</Text>
+        </Pressable>)
+      }
       <StatusBar style='auto'/>
     </SafeAreaView>
   )

@@ -106,7 +106,7 @@ jobs:
 
       - name: Detox e2e tests for iOS
         working-directory: app/packages/kalk
-        run: bash -c "NODE_OPTIONS='--max-old-space-size=4096' detox test --headless -c ios.release"
+        run: bash -c "NODE_OPTIONS='--max-old-space-size=4096' detox test --headless --loglevel fatal -c ios.release"
 
       - name: Shut down services
         run: docker-compose down
