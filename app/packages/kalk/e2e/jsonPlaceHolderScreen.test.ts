@@ -47,7 +47,7 @@ describe('Json Placeholder Screen', () => {
 
       await fetchButton.tap()
 
-      const expectedTodoText =  '{\n' +
+      const expectedTodoText = '{\n' +
       '  "userId": 1,\n' +
       '  "id": 1,\n' +
       '  "title": "delectus aut autem",\n' +

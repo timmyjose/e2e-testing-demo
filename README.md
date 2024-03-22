@@ -18,11 +18,24 @@ Start the required services:
 $ docker-compose up
 ```
 
+Setup the project:
+
+```
+$ yarn setup
+```
+
 Run the e2e tests:
 
 ```
-$ detox build -c ios.test
-$ detox test -c ios.test --reuse
+$ detox build -c ios.debug
+$ NODE_ENV=test detox test -c ios.debug
+```
+
+or
+
+```
+$ detox build -c ios.release
+$ detox test -c ios.release
 ```
 
 ## CI 
