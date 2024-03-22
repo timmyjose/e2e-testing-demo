@@ -1,6 +1,7 @@
 import { expect, device, element, by } from 'detox'
 import { beforeAll, beforeEach, describe, it } from '@jest/globals'
 import { swipeIntros } from './swipeIntroSlider'
+import { isDebugMode } from './helper'
 
 describe('Home Screen', () => {
   beforeAll(async () => {
@@ -14,6 +15,10 @@ describe('Home Screen', () => {
 
     // Swipe through the slider screens
     await swipeIntros()
+
+    if (isDebugMode()) {
+      console.log('Running in Debug mode')
+    }
   })
 
   describe('Home Screen elements should be visible', () => {

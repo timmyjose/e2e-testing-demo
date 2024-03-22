@@ -1,3 +1,11 @@
+const path = require('path');
+
+const loadEnv = (envFile) => {
+  require('dotenv').config({ path: envFile })
+}
+
+loadEnv(path.resolve(__dirname, '.env.test'))
+
 /** @type {Detox.DetoxConfig} */
 module.exports = {
   logger: {
