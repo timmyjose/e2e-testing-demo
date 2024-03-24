@@ -1,6 +1,7 @@
-import { expect, device, element, by } from 'detox'
+import { expect, device, element, by, waitFor } from 'detox'
 import { beforeEach, beforeAll, describe, it } from '@jest/globals'
 import { swipeIntros } from './swipeIntroSlider'
+import { getText, VISUAL_ELEMENTS_TIMEOUT } from '../components/helpers'
 
 describe('Add Screen', () => {
   beforeAll(async () => {
@@ -34,6 +35,11 @@ describe('Add Screen', () => {
       await expect(textInputY).toBeVisible()
     })
 
+    it('Should have the \'Fetch Data\' button', async () => {
+      const fetchDataButton = element(by.id('add-data-loader-fetch0button'))
+      await waitFor(fetchDataButton).toBeVisible().withTimeout(VISUAL_ELEMENTS_TIMEOUT)
+    })
+
     it('Should have the \'Add\' button', async () => {
       const addButton = element(by.id('add-add-button'))
       await expect(addButton).toBeVisible()
@@ -59,6 +65,28 @@ describe('Add Screen', () => {
       await textInputY.typeText('20')
       await addButton.tap()
       await expect(addSumText).toHaveText('30')
+    })
+
+    it('Should add numbers correctly by fetching it from the data-loader', async () => {
+      const addDataLoaderFetchButton = element(by.id('add-data-loader-fetch-button'))
+      await waitFor(addDataLoaderFetchButton).toBeVisible().withTimeout(VISUAL_ELEMENTS_TIMEOUT)
+      await addDataLoaderFetchButton.tap()
+
+      const textInputX = element(by.id('add-textinput-x'))
+      await waitFor(textInputX).toBeVisible().withTimeout(VISUAL_ELEMENTS_TIMEOUT)
+      const xVal = await getText('add-textinput-x')
+
+      const textInputY = element(by.id('add-textinput-y'))
+      await waitFor(textInputY).toBeVisible().withTimeout(VISUAL_ELEMENTS_TIMEOUT)
+      const yVal = await getText('add-textinput-y')
+
+      const expectedSumText = parseInt(xVal) + parseInt(yVal)
+
+      const addButton = element(by.id('add-add-button'))
+      const addSumText = element(by.id('add-sum-text'))
+
+      await addButton.tap()
+      await expect(addSumText).toHaveText(expectedSumText.toString())
     })
   })
 })

@@ -15,11 +15,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: 'true'
-      # - uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 18.x
-      #     cache: yarn
-      #     cache-dependency-path: '**/yarn.lock'
 
       - name: Set LANG globally for subsequent steps
         run: echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
@@ -83,14 +78,6 @@ jobs:
             echo "Services are not ready. Aborting..."
             exit 1
           fi
-
-      # - name: Install detox cli
-      #   run: npm install -g detox-cli
-
-      # - name: Install applesimutils
-      #   run: |
-      #     brew tap wix/brew
-      #     brew install applesimutils
 
       - name: Setup Project
         working-directory: app/packages/kalk

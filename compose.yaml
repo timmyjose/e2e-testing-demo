@@ -24,3 +24,10 @@ services:
       dockerfile: ./docker/Dockerfile.div
     ports:
       - "9003:9003"
+  data_loader:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.dataloader
+    ports:
+      - "8888:8888"
+  
