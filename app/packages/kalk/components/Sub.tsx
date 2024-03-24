@@ -7,6 +7,7 @@ import * as React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import axios from 'axios'
 
+const DATA_LOADER_URL = 'http://127.0.0.1:8888/gen'
 const SUB_SERVER_URL = 'http://127.0.0.1:9001/exec'
 
 type SubRequest = {
@@ -16,6 +17,16 @@ type SubRequest = {
 
 type SubResponse = {
   diff: number;
+}
+
+type FetchDataLoaderRequest = {
+  low: number | null;
+  high: number | null;
+}
+
+type FetchDataLoaderResponse = {
+  x: number;
+  y: number;
 }
 
 export default function Sub() {
@@ -39,10 +50,29 @@ export default function Sub() {
     }
   }
 
+  const handleDataLoaderFetch = async () => {
+    try {
+      const resp = await axios.post<FetchDataLoaderResponse>(DATA_LOADER_URL, {
+        low: null,
+        high: null
+      } as FetchDataLoaderRequest)
+
+      setX(resp.data.x)
+      setY(resp.data.y)
+    } catch (err) {
+      console.error(err)
+      setX(0)
+      setY(0)
+    }
+  }
+
   return (
     <SafeAreaView testID='sub-screen' style={styles.container}>
       <Pressable testID='sub-go-back-button' style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Go Back</Text>
+      </Pressable>
+      <Pressable testID='sub-data-loader-fetch-button' style={styles.button} onPress={handleDataLoaderFetch}>
+        <Text style={styles.buttonText}>Fetch Data</Text>
       </Pressable>
       <TextInput
         testID='sub-textinput-x'

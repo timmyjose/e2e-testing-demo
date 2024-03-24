@@ -7,6 +7,7 @@ import { useState } from 'react'
 import * as React from 'react'
 import axios from 'axios'
 
+const DATA_LOADER_URL = 'http://127.0.0.1:8888/gen'
 const DIV_SERVER_URL = 'http://127.0.0.1:9003/exec'
 
 type DivRequest = {
@@ -16,6 +17,16 @@ type DivRequest = {
 
 type DivResponse = {
   quot: number;
+}
+
+type FetchDataLoaderRequest = {
+  low: number | null;
+  high: number | null;
+}
+
+type FetchDataLoaderResponse = {
+  x: number;
+  y: number;
 }
 
 export default function Div() {
@@ -39,10 +50,28 @@ export default function Div() {
     }
   }
 
+  const handleDataLoaderFetch = async () => {
+    try {
+      const resp = await axios.post<FetchDataLoaderResponse>(DATA_LOADER_URL, {
+        low: null,
+        high: null
+      } as FetchDataLoaderRequest)
+
+      setX(resp.data.x)
+      setY(resp.data.y)
+    } catch (err) {
+      console.error(err)
+      setX(0)
+      setY(0)
+    }
+  }
   return (
     <SafeAreaView testID='div-screen' style={styles.container}>
       <Pressable testID='div-go-back-button' style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Go Back</Text>
+      </Pressable>
+      <Pressable testID='div-data-loader-fetch-button' style={styles.button} onPress={handleDataLoaderFetch}>
+        <Text style={styles.buttonText}>Fetch Data</Text>
       </Pressable>
       <TextInput
         testID='div-textinput-x'
