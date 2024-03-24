@@ -36,7 +36,7 @@ describe('Add Screen', () => {
     })
 
     it('Should have the \'Fetch Data\' button', async () => {
-      const fetchDataButton = element(by.id('add-data-loader-fetch0button'))
+      const fetchDataButton = element(by.id('add-data-loader-fetch-button'))
       await waitFor(fetchDataButton).toBeVisible().withTimeout(VISUAL_ELEMENTS_TIMEOUT)
     })
 
