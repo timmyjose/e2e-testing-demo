@@ -57,8 +57,10 @@ describe('Sub Screen', () => {
     it('Should subtract numbers correctly', async () => {
       const textInputX = element(by.id('sub-textinput-x'))
       const textInputY = element(by.id('sub-textinput-y'))
-      const subButton = element(by.id('sub-sub-button'))
       const subDiffText = element(by.id('sub-diff-text'))
+
+      const subButton = element(by.id('sub-sub-button'))
+      await waitFor(subButton).toBeVisible().withTimeout(VISUAL_ELEMENTS_TIMEOUT)
 
       await textInputX.typeText('10')
       await textInputY.typeText('20')
@@ -82,6 +84,8 @@ describe('Sub Screen', () => {
       const expectedDiffText = parseInt(xVal) - parseInt(yVal)
 
       const subButton = element(by.id('sub-sub-button'))
+      await waitFor(subButton).toBeVisible().withTimeout(VISUAL_ELEMENTS_TIMEOUT)
+
       const subDiffText = element(by.id('sub-diff-text'))
 
       await subButton.tap()

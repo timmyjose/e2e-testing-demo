@@ -57,8 +57,10 @@ describe('Div Screen', () => {
     it('Should divide numbers correctly', async () => {
       const textInputX = element(by.id('div-textinput-x'))
       const textInputY = element(by.id('div-textinput-y'))
-      const divButton = element(by.id('div-div-button'))
       const divQuotText = element(by.id('div-quot-text'))
+
+      const divButton = element(by.id('div-div-button'))
+      await waitFor(divButton).toBeVisible().withTimeout(VISUAL_ELEMENTS_TIMEOUT)
 
       await textInputX.typeText('20')
       await textInputY.typeText('10')
@@ -90,6 +92,8 @@ describe('Div Screen', () => {
       const expectedQuotText = Math.floor(parseInt(xVal) / parseInt(yVal))
 
       const divButton = element(by.id('div-div-button'))
+      await waitFor(divButton).toBeVisible().withTimeout(VISUAL_ELEMENTS_TIMEOUT)
+
       const divQuotText = element(by.id('div-quot-text'))
 
       await divButton.tap()

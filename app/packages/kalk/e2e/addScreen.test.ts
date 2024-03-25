@@ -58,8 +58,10 @@ describe('Add Screen', () => {
     it('Should add numbers correctly', async () => {
       const textInputX = element(by.id('add-textinput-x'))
       const textInputY = element(by.id('add-textinput-y'))
-      const addButton = element(by.id('add-add-button'))
       const addSumText = element(by.id('add-sum-text'))
+
+      const addButton = element(by.id('add-add-button'))
+      await waitFor(addButton).toBeVisible().withTimeout(VISUAL_ELEMENTS_TIMEOUT)
 
       await textInputX.typeText('10')
       await textInputY.typeText('20')
@@ -83,6 +85,8 @@ describe('Add Screen', () => {
       const expectedSumText = parseInt(xVal) + parseInt(yVal)
 
       const addButton = element(by.id('add-add-button'))
+      await waitFor(addButton).toBeVisible().withTimeout(VISUAL_ELEMENTS_TIMEOUT)
+
       const addSumText = element(by.id('add-sum-text'))
 
       await addButton.tap()

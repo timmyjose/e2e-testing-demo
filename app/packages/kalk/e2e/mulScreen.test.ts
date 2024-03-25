@@ -57,8 +57,10 @@ describe('Mul Screen', () => {
     it('Should multiply numbers correctly', async () => {
       const textInputX = element(by.id('mul-textinput-x'))
       const textInputY = element(by.id('mul-textinput-y'))
-      const mulButton = element(by.id('mul-mul-button'))
       const mulProdText = element(by.id('mul-prod-text'))
+
+      const mulButton = element(by.id('mul-mul-button'))
+      await waitFor(mulButton).toBeVisible().withTimeout(VISUAL_ELEMENTS_TIMEOUT)
 
       await textInputX.typeText('10')
       await textInputY.typeText('20')
@@ -82,6 +84,8 @@ describe('Mul Screen', () => {
       const expectedProdText = parseInt(xVal) * parseInt(yVal)
 
       const mulButton = element(by.id('mul-mul-button'))
+      await waitFor(mulButton).toBeVisible().withTimeout(VISUAL_ELEMENTS_TIMEOUT)
+
       const mulProdText = element(by.id('mul-prod-text'))
 
       await mulButton.tap()
