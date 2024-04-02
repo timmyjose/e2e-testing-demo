@@ -10,6 +10,7 @@ import { Image, StyleSheet, Text, View, LogBox } from 'react-native'
 import AppIntroSlider from 'react-native-app-intro-slider'
 import { ENV_NAME } from './constants'
 import JsonPlaceHolder from './components/JsonPlaceHolder'
+import QRCode from './components/QRCode'
 
 if (ENV_NAME === 'e2e') {
   console.log('Running in e2e environment. Ignoring all warning/error logs')
@@ -52,6 +53,7 @@ export type RootParamsList = {
   Mul: undefined;
   Div: undefined;
   JsonPlaceHolder: undefined;
+  QRCode: undefined;
 }
 
 const Stack = createNativeStackNavigator()
@@ -83,6 +85,7 @@ export default function App() {
           <Stack.Screen name='Mul' component={Mul} />
           <Stack.Screen name='Div' component={Div} />
           <Stack.Screen name='JsonPlaceHolder' component={JsonPlaceHolder} />
+          <Stack.Screen name='QRCode' component={QRCode} />
         </Stack.Navigator>
       </NavigationContainer>
       : <AppIntroSlider testID='app-intro-slider' renderItem={renderSlide} data={slides} onDone={onDone} />

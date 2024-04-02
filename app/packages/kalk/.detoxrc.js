@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 const loadEnv = (envFile) => {
   require('dotenv').config({ path: envFile })

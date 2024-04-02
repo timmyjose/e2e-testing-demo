@@ -29,6 +29,9 @@ export default function Home() {
           <Text testID='home-json-placeholder-text' style={styles.buttonText}>Json Demo</Text>
         </Pressable>)
       }
+      <Pressable testID='home-qrcode-button' style={styles.button} onPress={() => navigation.navigate('QRCode')}>
+        <Text testID='home-qrcode-button-text' style={styles.buttonText}>QR Code Demo</Text>
+      </Pressable>
       <StatusBar style='auto'/>
     </SafeAreaView>
   )
