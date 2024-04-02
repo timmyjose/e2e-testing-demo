@@ -34,7 +34,7 @@ export default function QRCode() {
         correctionLevel: 'H'
       })
       console.log('uri = ', uri)
-      setImageUri({ uri: uri })
+      setImageUri({ uri })
     } catch (err) {
       console.error(err)
     }

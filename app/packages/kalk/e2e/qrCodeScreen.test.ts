@@ -4,7 +4,7 @@ import { swipeIntros } from './swipeIntroSlider'
 import { VISUAL_ELEMENTS_TIMEOUT } from '../components/helpers'
 import jsQR from 'jsqr'
 import * as _Jimp from 'jimp'
-// @ts-ignore
+// @ts-expect-error 'A bug in Jimp: https://github.com/jimp-dev/jimp/issues/1194#issuecomment-1501177825'
 const Jimp = (typeof self !== 'undefined') ? (self.Jimp || _Jimp) : _Jimp
 
 describe('QR Code Screen', () => {
