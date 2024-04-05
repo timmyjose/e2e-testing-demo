@@ -38,6 +38,8 @@ $ detox build -c ios.release
 $ detox test -c ios.release
 ```
 
+Note: `e2e` tests are currently broken. Need to be fixed.
+
 ## CI 
 
 Currently, the CI Workflow expects a local `macos` runner. Pushes to `main` will trigger the Workflow.
